@@ -4,7 +4,78 @@ import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
-    public static void main(String [] args) {
+
+
+    public static void main(String[] args) {
+        int[][] x = new int[][] {{10,3},{40,20},{20,4},{20,5}};
+        Arrays.sort(x , (i, j) -> i[0] != j[0] ? i[0] - j[0] : i[1] - j[1]);
+
+        Arrays.stream(x).forEach(
+                System.out::println
+        );
+    }
+
+
+    static class IntPair {
+
+        public int x, y;
+        public IntPair(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public int hashCode() {
+            return x ^ y;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof IntPair) {
+                return ((IntPair)obj).x == this.x &&
+                        ((IntPair)obj).y == this.y;
+            }
+
+            return false;
+        }
+    }
+
+    public static void main1(String [] args) {
+
+
+
+
+        TreeMap<Integer, int[]> map = new TreeMap<>();
+
+
+
+        map.put(10, new int[] {2,3});
+        map.put(40, new int[] {2,3});
+        map.put(20, new int[] {2,3});
+        map.put(100, new int[] {2,3});
+
+        map.put(122, new int[] {2,3});
+        map.put(112, new int[] {2,3});
+        map.put(80, new int[] {2,3});
+        map.put(50, new int[] {2,3});
+        map.put(50, new int[] {2,3});
+        map.put(20, new int[] {2,3});
+
+
+
+        System.out.println(map.ceilingEntry(49));
+        System.out.println(map.floorEntry(51));
+
+        System.out.println(map.floorEntry(5));
+
+        Map.Entry entry = map.floorEntry(5);
+
+        System.out.println(entry);
+
+
+
+
+
 
         int[] nums  = new int[] { 2,1,3,4,23,12,12,3,4};
 
