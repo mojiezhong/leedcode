@@ -7,6 +7,24 @@ public class Main {
 
 
     public static void main(String[] args) {
+
+
+
+        Map<Character, Integer> m = new HashMap<>();
+
+        String s = "abcdabcccddcdc";
+
+        for (int i = 0;i < s.length();i++) {
+            m.merge(s.charAt(i), 1, (a, b) -> a + 1);
+        }
+
+
+        TreeMap<Integer, List<Character>> sorted = new TreeMap<>();
+
+        m.forEach((k, v) -> sorted.merge(v, new ArrayList<Character>(Arrays.asList(k)), (v1, v2) -> { v1.addAll(v2); return v1;} ));
+
+
+
         int[][] x = new int[][] {{10,3},{40,20},{20,4},{20,5}};
         Arrays.sort(x , (i, j) -> i[0] != j[0] ? i[0] - j[0] : i[1] - j[1]);
 
