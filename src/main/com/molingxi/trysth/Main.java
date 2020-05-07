@@ -3,6 +3,7 @@ package main.com.molingxi.trysth;
 import java.math.BigInteger;
 import java.util.*;
 
+
 public class Main {
 
 
@@ -122,12 +123,34 @@ public class Main {
 
 
 
+
+        int[][] nums = new int[10][];
+        for (int i = 0;i < nums.length;i++) {
+            int x = (int )(Math.random() * 1000);
+            nums[i] = new int[] {x , x +  (int) ( Math.random() * 10000) };
+        }
+        Arrays.stream(nums).forEach(
+                (x) -> System.out.println(String.format("%d %d", x[0], x[1]))
+        );
+
+        Arrays.sort(nums, (a, b) -> a[0] - b[0]);
+
+        System.out.println("========================================================================");
+
+        Arrays.stream(nums).forEach(
+                (x) -> System.out.println(String.format("%d %d", x[0], x[1]))
+        );
+    }
+    public static void main16(String [] args) {
+
         int[] nums  = new int[] { 2,1,3,4,23,12,12,3,4};
 
         Arrays.sort(nums);
 
         Arrays.stream(nums).forEach(System.out::println);
     }
+
+
 
     public  static void main15(String[] args) {
         ArrayList<Long> a1 = new ArrayList<>()
