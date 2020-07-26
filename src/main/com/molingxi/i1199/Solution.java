@@ -59,6 +59,22 @@ class Solution {
 //        sw.split();
 //        System.out.println("Split " + sw.getSplitTime());
 
+
+        Arrays.sort(arr);
+        Solution so = new Solution();
+        for (int i = 1;i < arr.length;i++){
+            int a1[] = Arrays.copyOf(arr, i);
+            if (so.minBuildTime2(
+                    a1 , split)  != so.minBuildTime3(a1, split, false)) {
+                so.minBuildTime3(a1,split , true);
+            }
+        }
+
+
+
+
+
+
         System.out.println(new Solution().minBuildTime2(
                 arr , split));
         sw.split();
@@ -72,7 +88,7 @@ class Solution {
         System.out.println("time in : " + sw.getSplitTime());
 
         System.out.println(new Solution().minBuildTime3(
-                arr , split));
+                arr , split, false));
 
         sw.split();
         System.out.println("time in : " + sw.getSplitTime());
@@ -87,7 +103,7 @@ class Solution {
     }
 
 
-    public  int minBuildTime3(int[] blocks, int split) {
+    public  int minBuildTime3(int[] blocks, int split, boolean print) {
 
         Arrays.sort(blocks);
         int[] previous = new int[blocks.length];
@@ -114,13 +130,21 @@ class Solution {
                     numOfWorks *= 2;
                     if (currValue <= min) {
                         min = currValue;
-                    } else {
-                        break;
                     }
-                } while(numOfWorks <= 2* (i + 1));
+                } while(numOfWorks < 2* (i + 1));
                 cur[j -1] = min;
             }
+            if (print) {
+                System.out.print("" + i + " : ");
+                for (int k = 0; k <= i; k++) {
+                    System.out.print(" " + cur[k]);
+
+                }
+                System.out.println(",,");
+            }
+            int[] t = previous;
             previous = cur;
+            cur = t;
         }
 
         return previous[0];
