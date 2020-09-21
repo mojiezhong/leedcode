@@ -1,6 +1,7 @@
 package main.com.molingxi.i472;
 
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,6 +44,8 @@ import java.util.List;
  */
 public class Solution {
     public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        Arrays.sort(words, (a, b) -> a.length() - b.length());
 
+        return null;
     }
 }
