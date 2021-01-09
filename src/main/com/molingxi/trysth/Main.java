@@ -10,31 +10,46 @@ public class Main {
     public static void main(String[] args) {
 
 
+        LinkedList<Integer> q = new LinkedList<>();
 
-        TreeMap<Integer, Integer> m = new TreeMap<>();
+        q.push(1);
+        q.push(2);
+        q.push(3);
 
-        m.merge(1,1, (k,v ) -> k + 1);
-        m.merge(1,1, (k,v ) -> k + 1);
-        m.merge(1,1, (k,v ) -> k + 1);
-        m.merge(1,1, (k,v ) -> k + 1);
-        m.merge(2,1, (k,v ) -> k + 1);
-        m.merge(2,1, (k,v ) -> k + 1);
-        m.merge(2,1, (k,v ) -> k + 1);
-        m.merge(2,1, (k,v ) -> k + 1);
-        m.merge(2,1, (k,v ) -> k + 1);
+        System.out.println(q.peek());
+        System.out.println(q.getFirst());
+        System.out.println(q.getLast());
+        System.out.println(q.pop());
+        System.out.println(q.pop());
+        System.out.println(q.pop());
+        System.out.println(q.pop());
 
-        ///m.forEach((k,v) -> System.out.println(k + ":" + v));
-
-        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
-        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
-        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
-        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
-        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
-
-
-
-
-        m.forEach((k,v) -> System.out.println(k + ":" + v));
+//
+//
+//        TreeMap<Integer, Integer> m = new TreeMap<>();
+//
+//        m.merge(1,1, (k,v ) -> k + 1);
+//        m.merge(1,1, (k,v ) -> k + 1);
+//        m.merge(1,1, (k,v ) -> k + 1);
+//        m.merge(1,1, (k,v ) -> k + 1);
+//        m.merge(2,1, (k,v ) -> k + 1);
+//        m.merge(2,1, (k,v ) -> k + 1);
+//        m.merge(2,1, (k,v ) -> k + 1);
+//        m.merge(2,1, (k,v ) -> k + 1);
+//        m.merge(2,1, (k,v ) -> k + 1);
+//
+//        ///m.forEach((k,v) -> System.out.println(k + ":" + v));
+//
+//        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
+//        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
+//        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
+//        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
+//        m.compute(2,  (k, v) ->{ return v == 1 ? null: v - 1;});
+//
+//
+//
+//
+//        m.forEach((k,v) -> System.out.println(k + ":" + v));
 
 //
 //
