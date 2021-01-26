@@ -2,7 +2,37 @@ package main.com.molingxi.i1463;
 
 public class Solution {
     public int cherryPickup(int[][] grid) {
-        return 100;
+        int totoalColumn = grid[0].length;
+        int values[][] = new int[totoalColumn][totoalColumn];
+        int currvalues[][] = new int[totoalColumn][totoalColumn];
+
+        for (int i = 0;i < totoalColumn;i++) {
+            for (int j = 0;j < totoalColumn;j++) {
+                if (i != j)
+                    currvalues[i][j] = grid[grid.length - 1][i] + grid[grid.length - 1] [j];
+            }
+        }
+
+
+        for (int y = grid.length - 2;y >= 0;y--) {
+            int[][] temp = values;
+            values = currvalues;
+            currvalues = temp;
+            for (int x1 = 0;x1 < Math.min(y + 1, totoalColumn); x1++) {
+                for (int x2 = totoalColumn - 1; x2 >= Math.max(x1, totoalColumn - y -1);x2--) {
+                    int max = Integer.MIN_VALUE;
+
+                    for (int i = Math.max(0, x1);i < Math.min(totoalColumn - 1, x1 + 1);i++ ) {
+                        for (int j = Math.max(i + 1, x2 - 1); j <= Math.min(totoalColumn - 1, x2 + 1);j ++ ){
+                            max = Math.max(max, values[i][j]);
+                        }
+                    }
+                    currvalues[x1][x2] = max + grid[y][x1] + grid[y][x2];
+                }
+            }
+        }
+
+        return currvalues[0][totoalColumn - 1];
     }
 }
 
