@@ -19,7 +19,11 @@ public class Solution {
             }
         }
 
-        return cherryPickupInternal(grid, 0 , 0 , 0);
+        int result =  cherryPickupInternal(grid, 0 , 0 , 0);
+        if (result == -1) {
+            result = 0 ;
+        }
+        return result;
 
     }
 
@@ -32,6 +36,11 @@ public class Solution {
         x2 = d < grid.length ? s2 : d -grid.length + 1 + s2;
 
 
+        if (d == cache.length) {
+
+                return grid[grid.length - 1][grid[0].length - 1];
+
+        }
         if (grid[y1][x1] == -1 || grid[y2][x2] == -1) {
             return -1;
         } else {
@@ -39,24 +48,29 @@ public class Solution {
             if (cache[d][s1][s2] >= -1) {
                 return cache[d][s1][s2];
             } else {
-                if (d == grid.length + grid[0].length - 2) {
-                    return grid[grid.length - 1][grid[0].length - 1];
-                } else {
-                    int result = Integer.MIN_VALUE;
+                {
+                    int result = -1;
 
                     int current = s1 == s2 ? grid[y1][x1] : grid[y1][x1] + grid[y2][x2];
 
+
+                    int ss1 = d < grid.length -1 ? s1 :  s1 - 1;
+                    int ss2 = d < grid.length -1  ? s2 :  s2 - 1;
+
                     for (int i = 0;i < 2 ; i++) {
-                        if (inScope(grid, d + 1, s1 + i) ) {
+                        if (inScope(grid, d + 1, ss1 + i) ) {
                             for (int j = 0;j < 2;j++) {
-                                if (inScope(grid, d+ 1, s2 + j)) {
-                                    result =Math.max(result,   current + cherryPickupInternal(grid, d + 1, s1 + i, s2 + j);
+                                if (inScope(grid, d+ 1, ss2 + j) && ss2 + j >= ss1 + i) {
+                                    int value = cherryPickupInternal(grid, d + 1, ss1 + i, ss2 + j);
+                                    if (value >= 0 )
+                                        result =Math.max(result,   current + value);
                                 }
                             }
                         }
                     }
 
-                    grid[grid.length - 1][grid[0].length - 1] = result;
+
+                    cache[d][s1][s2]= result;
                     return result;
                 }
             }
@@ -64,6 +78,6 @@ public class Solution {
     }
 
     boolean inScope(int[][] grid, int d, int s) {
-        return d < grid.length && s <= d || d >= grid.length && d - grid.length + 1 + s < grid[0].length;
+        return d < grid.length && s <= d || d >= grid.length && d - grid.length + 1 + s < grid[0].length  && s >= 0;
     }
 }
