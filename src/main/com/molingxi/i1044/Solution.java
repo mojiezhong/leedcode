@@ -13,7 +13,7 @@ public class Solution {
         List<Integer>[] buckets = new List['z' - 'a' + 1];
 
         for (int i = 0; i < buckets.length; i++) {
-            buckets[i] = new LinkedList<>();
+            buckets[i] = new ArrayList<>();
         }
 
         for (int i = s.length() - 1; i >= 0;) {
@@ -30,53 +30,54 @@ public class Solution {
         int start = -1;
         int mx = 0;
 
-        for (int i = s.length() - 1; i >= 0; i--) {
-
+        for (int i = s.length() - 1; i > 0; i--) {
 
             char c = s.charAt(i);
             List<Integer> is = buckets[c - 'a'];
-            if (is.size() >= 2) {
-                is.remove(0);
+
+            int blockStart = is.get(0);
+            int blockLength = is.get(1);
+
+            if (i == blockStart && blockLength > 1) {
+                if (blockLength - 1 > mx) {
+                    mx = blockLength - 1;
+                    start = i - blockLength + 1;
+                }
+            }
+
+            for (int j = 2;j < is.size();j+= 2) {
+                int bs2 = is.get(j);
+                int bl2 = is.get(j + 1);
 
 
-                Iterator<Integer> iter = is.iterator();
+                if (bl2 >= blockLength - blockStart + i) {
 
+                    bs2 = bs2 - bl2  + blockLength - blockStart + i;
 
-                while (iter.hasNext()) {
-                    int x = iter.next();
-
-                    if ((i < s.length() - 1 && s.charAt(i + 1) == s.charAt(x +1)) || visited[x] == i) {
+                    if (i < s.length() - 1 && s.charAt(i + 1) == s.charAt(bs2 + 1)) {
                         continue;
                     }
 
-                    visited[x] = i;
+                    int ll = blockLength - blockStart + i + 1;
 
-//
-//                    if (i < s.length() - 1 && s.charAt(x + 1) == s.charAt(i + 1)) {
-//                        maxLength[x] = maxLength[x + 1] + 1;
-//                    } else {
-//                        maxLength[x] = 1;
-//                    }
-//
-//                    if (maxLength[x] > mx) {sz
-//                        start = x;
-//                        mx = maxLength[x];
-//                    }
-                    int l = 1;
-                    while (x - l >= 0 && s.charAt(x - l) == s.charAt(i - l)) {
-                        visited[x - l] = i;
-                        visited[i - l] = i;
-                        l++;
-
+                    while (bs2 - ll + 1>= 0 && s.charAt(bs2 - ll + 1) == s.charAt(i - ll + 1)) {
+                        ll += 1;
                     }
 
-                    if (l > mx) {
-                        start = x - l + 1;
-                        mx = l;
+                    ll--;
+                    if (ll > mx) {
+                        mx = ll;
+                        start = bs2 - ll + 1;
                     }
-
                 }
             }
+
+            if (i == blockStart - blockLength + 1) {
+                is.remove(0);
+                is.remove(0);
+            }
+
+
         }
 
         if (start >= 0)
